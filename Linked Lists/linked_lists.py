@@ -55,7 +55,7 @@ class LinkedList:
 
 
 if __name__ == "__main__":
-    llist = LinkedList()
+    """llist = LinkedList()
     llist.appendatTail("A")
     llist.appendatTail("B")
     llist.appendatTail("C")
@@ -63,5 +63,5 @@ if __name__ == "__main__":
     llist.appendatTail("E")
     llist.appendatTail("B")
     llist.appendatTail("C")
-    print(llist)
-    
+    print(llist) ----- output: A->B->C->D->E->B->C
+    """
