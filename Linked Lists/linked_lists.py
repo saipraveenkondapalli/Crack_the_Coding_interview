@@ -1,5 +1,10 @@
-from unittest.mock import NonCallableMagicMock
+"""
 
+This is a simple implementation of a linked list in Python. This class is used throught the second chapter to slove the problems.
+ 
+this class is imported in the other files in this folder to slove problems related to linked lists in the book Cracking the Coding Interview.
+
+"""
 
 class Node:
     def __init__(self, data):
