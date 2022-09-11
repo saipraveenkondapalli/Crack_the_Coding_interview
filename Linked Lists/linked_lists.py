@@ -24,6 +24,12 @@ class LinkedList:
         while last_node.next:
             last_node = last_node.next
         last_node.next = new_node
+    def appendAthead(self, key):
+        temp = self.head 
+        self.head = Node(key)
+        self.head.next = temp 
+        return 
+    
 
     def deleteNode(self,key):
         cur_node = self.head 
@@ -51,11 +57,20 @@ class LinkedList:
                 cur_node = cur_node.next
         return ""
     
+    def __len__(self):
+        cur_node = self.head
+        count = 0
+        while cur_node:
+            count += 1
+            cur_node = cur_node.next
+        return count
+    
+    
 
 
 
 if __name__ == "__main__":
-    """llist = LinkedList()
+    llist = LinkedList()
     llist.appendatTail("A")
     llist.appendatTail("B")
     llist.appendatTail("C")
@@ -63,5 +78,5 @@ if __name__ == "__main__":
     llist.appendatTail("E")
     llist.appendatTail("B")
     llist.appendatTail("C")
-    print(llist) ----- output: A->B->C->D->E->B->C
-    """
+    print(llist)  #----- output: A->B->C->D->E->B->C
+    
