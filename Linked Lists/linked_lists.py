@@ -15,6 +15,7 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
+    
     def appendatTail(self, data):
         new_node = Node(data)
         if self.head is None:
@@ -24,12 +25,27 @@ class LinkedList:
         while last_node.next:
             last_node = last_node.next
         last_node.next = new_node
+    
+
     def appendAthead(self, key):
         temp = self.head 
         self.head = Node(key)
         self.head.next = temp 
         return 
     
+    # def append at position
+    def appendAtPosition(self, data, position):
+        new_node = Node(data)
+        cur_node = self.head
+        if position == 0:
+            new_node.next = cur_node
+            self.head = new_node
+            return
+        for i in range(position-1):
+            cur_node = cur_node.next
+        new_node.next = cur_node.next
+        cur_node.next = new_node
+        return
 
     def deleteNode(self,key):
         cur_node = self.head 
@@ -43,7 +59,24 @@ class LinkedList:
                 return
             cur_node = cur_node.next # point to next node
 
-        return 
+        return
+    
+    # reverse a linked list
+    def reverse(self):
+        prev = None
+        cur_node = self.head
+        while cur_node:
+            nxt = cur_node.next
+            cur_node.next = prev
+            prev = cur_node
+            cur_node = nxt
+        self.head = prev
+    
+    def get_last_node(self):
+        cur_node = self.head
+        while cur_node.next:
+            cur_node = cur_node.next
+        return cur_node
 
 
     def __str__(self):
@@ -65,9 +98,24 @@ class LinkedList:
             cur_node = cur_node.next
         return count
     
+    def __getitem__(self, index):
+        if index >= len(self):
+            raise IndexError("Index out of range")
+        cur_node = self.head
+        for i in range(index):
+            cur_node = cur_node.next
+        return cur_node.data
+
+    def __setitem__(self, index, value):
+        if index >= len(self):
+            raise IndexError("Index out of range")
+        cur_node = self.head
+        for i in range(index):
+            cur_node = cur_node.next
+        cur_node.data = value
+
     
-
-
+    
 
 if __name__ == "__main__":
     llist = LinkedList()
@@ -78,5 +126,6 @@ if __name__ == "__main__":
     llist.appendatTail("E")
     llist.appendatTail("B")
     llist.appendatTail("C")
-    print(llist)  #----- output: A->B->C->D->E->B->C
-    
+    print(llist) 
+    #----- output: A->B->C->D->E->B->C
+
