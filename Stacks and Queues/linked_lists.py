@@ -48,7 +48,7 @@ class LinkedList:
         return
 
     def deleteNode(self,key):
-        cur_node = self.head 
+        cur_node = self.head
         if cur_node and cur_node.data == key:
             self.head = cur_node.next
             return
@@ -60,6 +60,14 @@ class LinkedList:
             cur_node = cur_node.next # point to next node
 
         return
+    
+
+    def peek(self):
+        cur = self.head
+        while cur.next:
+            cur = cur.next
+        return cur.data
+    
     
     # reverse a linked list
     def reverse(self):
@@ -77,6 +85,16 @@ class LinkedList:
         while cur_node.next:
             cur_node = cur_node.next
         return cur_node
+    def pop(self):
+        cur_node = self.head
+        while cur_node.next.next is not None:
+            cur_node = cur_node.next
+        temp = cur_node.next.data
+        cur_node.next = None
+        return temp
+    
+    
+
 
 
     def __str__(self):
