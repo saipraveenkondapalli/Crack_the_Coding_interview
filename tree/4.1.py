@@ -2,7 +2,7 @@ from graph import Graph
 
 
 def check_whether_route_exists(graph, source, destination):
-    visted = [False] * (len(graph))
+    visted = [False] * (len(graph)+1)
     queue = []
     queue.append(source)
     visted[source] = True
@@ -26,9 +26,10 @@ def check_whether_route_exists(graph, source, destination):
 if __name__ == "__main__":
     g = Graph()
     g.addEdge(0, 1)
-    g.addEdge(0, 2)
     g.addEdge(1, 2)
-    g.addEdge(2, 0)
-    g.addEdge(2, 3)
-    g.addEdge(3, 3)
-    print(check_whether_route_exists(g.graph, 1,0))
+    g.addEdge(2,3)
+    g.addEdge(4, 2)
+    g.addEdge(3, 4)
+    g.addEdge(4, 5)
+    g.addEdge(5, 6)
+    print(check_whether_route_exists(g.graph, 6, 0))
