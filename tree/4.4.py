@@ -13,13 +13,11 @@ def isBalanced(root):
         return True
     lh = height(root.left)
     rh = height(root.right)
-    if abs(lh - rh) <= 1 and isBalanced(root.left) is True and isBalanced(root.right) is True: # height of left and right subtree is less than or equal to 1 then return true
+    if abs(lh - rh) <= 1 and isBalanced(root.left) is True and isBalanced(
+            root.right) is True:  # height of left and right subtree is less than or equal to 1 then return true
 
         return True
     return False
-
-
-    
 
 
 if __name__ == "__main__":
@@ -31,4 +29,3 @@ if __name__ == "__main__":
     tree.root.right.left.right = Node(7)
     tree.print()
     print(isBalanced(tree.root))
-
