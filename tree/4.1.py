@@ -2,25 +2,20 @@ from graph import Graph
 
 
 def check_whether_route_exists(graph, source, destination):
-    visted = [False] * (len(graph)+1)
-    queue = []
-    queue.append(source)
-    visted[source] = True
+    visited = [False] * (len(graph)+1)
+    queue = [source]
+    visited[source] = True
     ans = []
     while queue:
         s = queue.pop(0)
         ans.append(s)
         for i in graph[s]:
-            if visted[i] == False:
+            if not visited[i]:  # same as if visited[i] == False:
                 if i == destination:
                     return True
                 queue.append(i)
-                visted[i] = True
+                visited[i] = True
     return False
-
-
-
-
 
 
 if __name__ == "__main__":
