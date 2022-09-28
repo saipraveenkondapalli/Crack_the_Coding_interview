@@ -23,10 +23,6 @@ def stringcompression(string):
             count = 0
     return compressed if len(compressed) < n else string
 
-
-
-
-
 # book solution 2
 def stringcompression2(string):
     compressed = []
@@ -40,8 +36,6 @@ def stringcompression2(string):
             count = 0
     compressed = ''.join(compressed)
     return compressed if len(compressed) < n else string
-
-
 
 
 # book solution 3
@@ -61,7 +55,6 @@ def compressedString3(string):
     return ''.join(compressed)
 
 
-
 # wrapper function for stringcompression3
 def countCompression(string):
     compressed_length = 0
@@ -78,12 +71,13 @@ def countCompression(string):
 
 
 class Test(unittest.TestCase):
-    data= [
+    data = [
         ('aabcccccaaa','a2b1c5a3'),
         ('abcdef','abcdef'),
         ('aabbcc','aabbcc'),
         ('aaabbbccc','a3b3c3'),
         ('aaabbbcccddd','a3b3c3d3')]
+
     def test_stringcompression(self):
         for [string,expected] in self.data:
             actual = stringcompression2(string)
