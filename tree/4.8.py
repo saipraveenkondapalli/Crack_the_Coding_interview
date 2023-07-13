@@ -23,7 +23,7 @@ def depth(node):
 
 
 def goUp(node, delta):
-    while delta > 0 and node != None:
+    while delta > 0 and node:
         node = node.parent
         delta -= 1
     return node
@@ -31,9 +31,9 @@ def goUp(node, delta):
 
 def commonAncestor(p, q):
     delta = depth(p) - depth(q)
-    first = q if delta > 0 else p
-    second = p if delta > 0 else q
-    second = goUp(second, abs(delta))
+    first = q if delta > 0 else p  # get shallower node
+    second = p if delta > 0 else q  # get deeper node
+    second = goUp(second, abs(delta))  # move deeper node up
     while (first != second and first != None and second != None):
         first = first.parent
         second = second.parent
@@ -42,7 +42,7 @@ def commonAncestor(p, q):
 
 """
  
- we could trace p's path upwards and check if q is on that path.
+we could also trace p's path upwards and check if q is on that path.
  
 """
 
@@ -64,7 +64,7 @@ def getSibilings(node):  # helper function for solution2, get the sibling of a n
 
 
 def commonAncestor2(root, p, q):  # solution 2
-    if not covers(root, p) or not covers(root, q): # Error check - one node is not in tree
+    if not covers(root, p) or not covers(root, q):  # Error check - one node is not in tree
         return None
     elif covers(p, q):
         return p
@@ -77,6 +77,7 @@ def commonAncestor2(root, p, q):  # solution 2
         sibling = getSibilings(parent)
         parent = parent.parent
     return parent
+
 
 # Solution 3
 # Runtime: O(n) for a balanced tree
@@ -99,6 +100,7 @@ def ancestorHelper(root, p, q):
     return ancestorHelper(childSide, p, q)
 
 
+# ------------------------------------------------- Solution 4 -------------------------------------------------
 
 
 if __name__ == "__main__":

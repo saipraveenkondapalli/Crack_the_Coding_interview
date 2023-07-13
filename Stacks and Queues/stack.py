@@ -20,7 +20,18 @@ class Stack:
     # return the top item of the stack
     def peek(self):
         return self.items[-1]
-    
+
+    def sort(self):
+        buffer = Stack()
+        while not self.is_empty():
+            temp = self.pop()
+            while not buffer.is_empty() and buffer.peek() > temp:
+                self.push(buffer.pop())
+            buffer.push(temp)
+        while not buffer.is_empty():
+            self.push(buffer.pop())
+        return
+
     # return the size of the stack
     def is_empty(self):
         return self.items == []
@@ -60,7 +71,8 @@ class Stack2:
     # return the whether the stack is empty or not
     def is_empty(self):
         return self.items.head == None
-    
+
+
     def __str__(self):
         return str(self.items)
     
@@ -68,8 +80,7 @@ class Stack2:
         return len(self.items)
 
 
-
-
+"""
 if __name__ == "__main__":
     stack = Stack()
     stack.push(1)
@@ -92,4 +103,4 @@ if __name__ == "__main__":
     print(stack2.peek())
     print(stack2.is_empty())
     print(stack2)
-    print(len(stack2))
+    print(len(stack2))"""

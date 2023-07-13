@@ -17,17 +17,16 @@ class SetOfStacks:
     
     def push(self, item):
         if len(self.stacks[-1]) == self.threshold:
-            self.stacks.append(Stack()) 
-        
+            self.stacks.append(Stack())
+
         self.stacks[-1].push(item)
     
     def pop(self):
         last = self.stacks[-1]
-        if val:
+        if last:
             val = last.pop()
             if len(last) == 0:
                 self.stacks.pop()
-            
             return val
         raise Exception("Stack is empty")
 
@@ -39,6 +38,7 @@ class Node:
         self.data = data
         self.above = None
         self.below = None
+
 
 class Stack2:
     def __init__(self, capacity) -> None:
@@ -52,13 +52,13 @@ class Stack2:
     
     def is_empty(self):
         return self.size == 0
-    
+
     def join(self, above, below):
         if below:
             below.above = above
         if above:
             above.below = below
-    
+
     def push(self, data):
         if self.size >= self.capacity:
             return False
@@ -87,6 +87,7 @@ class Stack2:
             self.bottom.below = None
         self.size -= 1
         return b.data
+
     def left_shift(self, index, remove_top):
         stack = self.stacks[index]
         removed_item = stack.pop() if remove_top else stack.remove_bottom()
@@ -97,12 +98,9 @@ class Stack2:
             stack.push(v)
         
         return removed_item
+
     def pop_at(self, index):
         return self.left_shift(index, True) if len(self.stacks) > index else None
-    
-    
-    
-
 
 
 if __name__ == "__main__":

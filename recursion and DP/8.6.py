@@ -7,21 +7,23 @@ sit on top of an even larger one). You have the following constraints:
 (2) A disk is slid off the top of one tower onto the next tower.
 (3) A disk can only be placed on top of a larger disk.
 Write a program to move the disks from the first tower to the last using stacks.
+
+Runtime: O(2^n) because we are doing 2 recursive calls each time until we reach the base case.
 """
 
 
 def tower_of_hanoi(n, source, dest, buffer):
-    if n == 1:
-        dest.append(source.pop())
-        return
-    tower_of_hanoi(n - 1, source, buffer, dest)
+    if n <= 0: return
+    tower_of_hanoi(n-1, source, buffer, dest)
     dest.append(source.pop())
-    tower_of_hanoi(n - 1, buffer, dest, source)
+    tower_of_hanoi(n-1, buffer, dest, source)
     return dest
 
 
 if __name__ == "__main__":
-    A = [1,2,3,4,5,6,7,8,9,10]
-    B = []
-    C = []
-    print(tower_of_hanoi(len(A), A,B,C))
+    n = 5
+    source = [i for i in range(n, 0, -1)] # [5, 4, 3, 2, 1]
+    dest = []
+    buffer = []
+    print(source, dest, buffer)
+    print(tower_of_hanoi(n, source, dest, buffer))

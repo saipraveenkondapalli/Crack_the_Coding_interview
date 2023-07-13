@@ -23,7 +23,27 @@ def binaryToString(num):
 
     return ''.join(binary)
 
+def binaryToString2(num):
+    if num >= 1 or num <=0:
+        return "ERROR"
+    binary = ['.']
+    if len(binary) >= 32:
+        return "ERROR"
+    frac = 0.5
+    while num > 0:
+        if len(binary) >= 32:
+            return "ERROR"
+        if num >= frac:
+            binary.append('1')
+            num -= frac
+        else:
+            binary.append('0')
+        frac /= 2
+
+    return ''.join(binary)
+
 
 
 if __name__ == "__main__":
     print(binaryToString(0.75))
+    print(binaryToString2(0.75))

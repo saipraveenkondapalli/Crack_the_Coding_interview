@@ -23,7 +23,7 @@ class Node:
         """
         leftSize = 0 if self.left == None else self.left.size
         index = random.randint(0, self.size - 1)
-        if index < leftSize:
+        if index < leftSize:  # go left
             return self.left.getRandom()
         elif index == leftSize:
             return self

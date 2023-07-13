@@ -8,17 +8,18 @@ Sort the stack, you are allowed to use only one buffer stack
 
 from stack import Stack
 
-def sort(stack):
+
+def sort(s1):
     buffer = Stack()
-    while not stack.is_empty():
-        temp = stack.pop()
+    while not s1.is_empty():
+        temp = s1.pop()
         while not buffer.is_empty() and buffer.peek() > temp:
-            stack.push(buffer.pop())
+            s1.push(buffer.pop())
         buffer.push(temp)
     while not buffer.is_empty():
-        stack.push(buffer.pop())
-    return stack
-    
+        s1.push(buffer.pop())
+    return s1
+
 
 if __name__ == "__main__":
     stack = Stack()
@@ -27,9 +28,12 @@ if __name__ == "__main__":
     stack.push(3)
     stack.push(4)
     stack.push(5)
-    
     print(stack)
-    sort(stack)
+    stack.sort()
     print(stack)
-
-
+    print(stack.pop())
+    stack.push(77)
+    stack.push(1)
+    print(stack)
+    stack.sort()
+    print(stack)

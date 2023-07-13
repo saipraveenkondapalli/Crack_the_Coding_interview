@@ -15,15 +15,14 @@ def flipBitToWin(n):
         if n & 1 == 1:
             currentLength += 1
         elif n & 1 == 0:
+            # to check if two consecutive 0s are present i.e by
+            # checking if the next bit is 0(left to right) using AND operator WITH 2(10) and 'n'
             previousLength = 0 if (n & 2) == 0 else currentLength
             currentLength = 0
-       # print(currentLength, previousLength, maxlength)
-        maxlength = max(previousLength+currentLength+1, maxlength)
+        maxlength = max(previousLength + currentLength + 1, maxlength)
         n = n >> 1
     return maxlength
 
 
-
 if __name__ == "__main__":
-    print(flipBitToWin(1775)) # 11011101111, answer = 8
-    #print(flipBitToWin(0b1111111111111111111111111111111)) # 31
+    print(flipBitToWin(1775))  # 11011101111, answer = 8

@@ -11,14 +11,14 @@ class MyQueue:
         self.old = Stack()
     
     def size(self):
-        return self.new.size + self.old.size
+        return len(self.new) + len(self.old)
     
     def add(self, val):
         self.new.push(val)
     
     def shiftStack(self):
         if self.old.is_empty():
-            while(not self.new.is_empty()):
+            while not self.new.is_empty():
                 self.old.push(self.new.pop())
 
 

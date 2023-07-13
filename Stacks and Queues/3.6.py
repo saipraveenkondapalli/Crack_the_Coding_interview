@@ -5,12 +5,13 @@ People must adopt either the "oldest" (based on arrival time)
 of all animals at the shelter, or they can select whether they would prefer a dog or a cat 
 (and will receive the oldest animal of that type). They cannot select which specific animal they would like.
 Create the data structures to maintain this system and implement operations such as enqueue, dequeueAny, dequeueDog, and dequeueCat.
- You may use the built-in LinkedList data structure.
+You may use the built-in LinkedList data structure.
 
 """
 from linked_lists import *
 
 from queue import Queue
+
 
 class Animal:
     def __init__(self) -> None:
@@ -26,8 +27,8 @@ class Animal:
     def get_order(self):
         return self.order
     
-    def is_older_than(self, animal):
-        return self.order < animal.get_order()
+    def is_older_than(self, pet):
+        return self.order < pet.get_order()
     
 
 class AnimalEnqeue:
@@ -69,14 +70,13 @@ class Dog(Animal):
         self.name = "dog"
         self.tag = self.name + str(tag)
 
+
 class Cat(Animal):
     def __init__(self, tag) -> None:
         super().__init__()
         self.name = "cat"
         self.tag = self.name + str(tag)
 
-
-    
 
 if __name__ == "__main__":
     animal = AnimalEnqeue()

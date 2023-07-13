@@ -2,21 +2,22 @@ from tree_linked_in import Tree, Node
 
 
 def height(root):
-    if root is None:
+    if not root:
         return 0
     return 1 + max(height(root.left), height(root.right))
 
 
 def isBalanced(root):
     # Runtime is O(n log n) because we are calling height() for each node in the tree
-    if root is None:
+    if not root:
         return True
+
     lh = height(root.left)
     rh = height(root.right)
-    if abs(lh - rh) <= 1 and isBalanced(root.left) is True and isBalanced(
-            root.right) is True:  # height of left and right subtree is less than or equal to 1 then return true
 
+    if abs(lh - rh) <= 1 and isBalanced(root.left) and isBalanced(root.right):
         return True
+
     return False
 
 

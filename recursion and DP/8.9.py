@@ -7,6 +7,11 @@ Output: ((())), (()()), (())(), ()(()), ()()()
 
 
 def parens(n):
+    """
+    Solution Optimized
+    Runtime: O(2^n) because we are doing 2 recursive calls each time until we reach the base case ,but avoid duplicates
+    so it is slightly  less than 2^n
+    """
     result = []
     parens_helper(n, n, "", result)
     return result
@@ -17,26 +22,25 @@ def parens_helper(left, right, s, result):
         result.append(s)
         return
     if left > 0:
-        parens_helper(left-1, right, s+"(", result)
+        parens_helper(left - 1, right, s + "(", result)
     if right > left:
-        parens_helper(left, right-1, s+")", result)
+        parens_helper(left, right - 1, s + ")", result)
 
-# Solutuion 2
+
+# Solution 2
 
 def solution2(remaining):
-    result = []
+    result = set()
     if remaining == 0:
-        result.append("")
+        result.add("")
     else:
         partials = solution2(remaining - 1)
         for s in partials:
             for i in range(len(s)):
                 if s[i] == "(":
                     s2 = insert_inside(s, i)
-                    if s2 not in result:
-                        result.append(s2)
-            if "()" + s not in result:
-                result.append("()" + s)
+                    result.add(s2)
+            result.add(s + "()")
     return result
 
 
@@ -46,7 +50,6 @@ def insert_inside(s, left_index):
     return left + "()" + right
 
 
-
 if __name__ == "__main__":
-    print(parens(3)) # ['((()))', '(()())', '(())()', '()(())', '()()()']
+    print(parens(3))  # ['((()))', '(()())', '(())()', '()(())', '()()()']
     print(solution2(3))
