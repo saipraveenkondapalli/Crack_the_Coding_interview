@@ -1,7 +1,5 @@
-from traceback import print_tb
-from webbrowser import get
-from linked_lists import LinkedList
-from tree_linked_in import Tree, Node
+from linked_lists import LinkedList, Node
+from tree import Tree, TreeNode
 
 
 def convertToLinkedList(sample_list):
@@ -65,18 +63,17 @@ def solution2(root):
 
 if __name__ == "__main__":
     tree = Tree()
-    tree.root = Node(1)
-    tree.root.left = Node(2)
-    tree.root.right = Node(3)
-    tree.root.left.left = Node(4)
-    tree.root.left.right = Node(5)
-    tree.root.right.left = Node(6)
-    tree.root.right.right = Node(7)
-    tree.root.left.left.left = Node(8)
-    tree.root.left.left.right = Node(9)
-    tree.root.left.right.left = Node(12)
+    tree.root = TreeNode(1)
+    tree.root.left = TreeNode(2)
+    tree.root.right = TreeNode(3)
+    tree.root.left.left = TreeNode(4)
+    tree.root.left.right = TreeNode(5)
+    tree.root.right.left = TreeNode(6)
+    tree.root.right.right = TreeNode(7)
+    tree.root.left.left.left = TreeNode(8)
+    tree.root.left.left.right = TreeNode(9)
+    tree.root.left.right.left = TreeNode(12)
 
     ans = (solution2(tree))
     for i in ans:
         print(i)
-
