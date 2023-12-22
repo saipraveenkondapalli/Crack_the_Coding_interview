@@ -68,6 +68,16 @@ class Graph:
         # Call the recursive helper function
         # to print DFS traversal
         self._DFSUtil(v, visited)
+    
+
+    # graph in a readable format
+    def __str__(self):
+        result = []
+        for node, edges in self.graph.items():
+            result.append(f"{node}: {', '.join(edges)}")
+        return "\n".join(result)
+     
+        
 
 
 if __name__ == "__main__":
