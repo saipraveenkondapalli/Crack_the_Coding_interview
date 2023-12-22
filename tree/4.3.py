@@ -47,17 +47,17 @@ def solution2(root):
     ans = []
     while q[0]:
         count = len(q)
-        temp = []
+        cur_level = []
         while count > 0:
-            x = q.pop(0)
-            if x:
-                if root.left:
-                    q.append(x.left)
-                if root.right:
-                    q.append(x.right)
-                temp.append(x.data)
+            cur = q.pop(0)
+            if cur:
+                if cur.left:
+                    q.append(cur.left)
+                if cur.right:
+                    q.append(cur.right)
+                cur_level.append(cur.data)
             count -= 1
-        ans.append(convertToLinkedList(temp))
+        ans.append(convertToLinkedList(cur_level))
     return ans
 
 
