@@ -6,6 +6,7 @@ class TreeNode:
         self.data = data
         self.left = None
         self.right = None
+        self.parent = None
 
 
 class Tree:
@@ -21,18 +22,21 @@ class Tree:
         return max(self._height(root.left), self._height(root.right)) + 1
 
     @staticmethod
-    def construct_binary_tree_from_list(arr: list):
+    def construct_binary_tree_from_list(arr: list, with_parent=False):
         arr.sort()
-        return Tree._construct_binary_tree(arr, 0, len(arr) - 1)
+        return Tree._construct_binary_tree(arr, 0, len(arr) - 1, with_parent)
 
     @staticmethod
-    def _construct_binary_tree(arr, start, end):
+    def _construct_binary_tree(arr, start, end, with_parent: bool, parent=None):
         if start > end:
             return None
         mid = (start + end) // 2
         root = TreeNode(arr[mid])
-        root.left = Tree._construct_binary_tree(arr, start, mid - 1)
-        root.right = Tree._construct_binary_tree(arr, mid + 1, end)
+        if with_parent:
+            root.parent = parent
+
+        root.left = Tree._construct_binary_tree(arr, start, mid - 1, with_parent, root)
+        root.right = Tree._construct_binary_tree(arr, mid + 1, end, with_parent, root)
         return root
 
     def __str__(self):
