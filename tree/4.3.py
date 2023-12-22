@@ -45,7 +45,7 @@ def solution2(root):
     root = root.root
     q = [root]
     ans = []
-    while q[0]:
+    while q:
         count = len(q)
         cur_level = []
         while count > 0:
