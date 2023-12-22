@@ -74,7 +74,7 @@ class Graph:
     def __str__(self):
         result = []
         for node, edges in self.graph.items():
-            result.append(f"{node}: {', '.join(edges)}")
+            result.append(f"{node}: {', '.join(map(str, edges))}")
         return "\n".join(result)
      
         
