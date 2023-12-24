@@ -2,7 +2,7 @@
 Check Subtree: T1 is a large tree, check whether T2 is a subtree of T1
 """
 
-from tree_linked_in import Tree, Node
+from tree import Tree, TreeNode as Node
 
 # simple solution
 
