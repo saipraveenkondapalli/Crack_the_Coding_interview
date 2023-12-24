@@ -1,6 +1,6 @@
 import collections
 
-from tree_linked_in import Tree, Node
+from tree import Tree, TreeNode as Node
 
 
 # Run time is O(N log N) where N is the number of nodes in the tree
@@ -124,6 +124,6 @@ if __name__ == "__main__":
     tree.root.left.left.right = Node(-2)
     tree.root.left.right.right = Node(1)
     tree.root.right.right = Node(11)
-    tree.print()
+    
     #print(countPathWithSumOptimized(tree.root, 8))
     print(countPathWithSumOptimized(tree.root, 8))
