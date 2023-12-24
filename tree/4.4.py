@@ -57,8 +57,7 @@ def _isBalanced2(root):
 
 if __name__ == "__main__":
     arr = [x for x in range(20)]
-    tree = Tree()
-    tree.root = Tree.construct_binary_tree_from_list(arr)
+    tree = Tree.construct_binary_tree_from_list(arr)
     print(isBalanced(tree.root))
     print(isBalanced2(tree.root))
     
