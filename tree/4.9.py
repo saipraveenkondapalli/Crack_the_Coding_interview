@@ -4,7 +4,7 @@ and inserting each element. Given a binary search tree with distinct elements, p
 arrays that could have led to this tree.
 """
 
-from .tree import Tree, TreeNode
+from tree import Tree, TreeNode
 
 
 def bst_sequences(root):
