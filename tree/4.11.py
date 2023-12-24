@@ -9,25 +9,26 @@ Design and implement an algorithm for getRandomNode, and explain how you would i
 # Run time complexity is O(log N) where N is the number of nodes in the tree
 import random
 
-
 class Node:
     def __init__(self, data):
         self.data = data
         self.left = None
         self.right = None
-        self.size = 0
+        self.size = 1
 
     def getRandom(self):
-        """
-        :return: a random node from the tree
-        """
-        leftSize = 0 if self.left == None else self.left.size
-        index = random.randint(0, self.size - 1)
-        if index < leftSize:  # go left
-            return self.left.getRandom()
-        elif index == leftSize:
-            return self
+        if self.left is None:
+            leftSize = 0
         else:
+            leftSize = self.left.size
+
+        randomIndex = random.randint(0, self.size - 1)
+
+        if randomIndex < leftSize:
+            return self.left.getRandom()
+        elif randomIndex == leftSize:
+            return self
+        elif self.right is not None:
             return self.right.getRandom()
 
     def insertInOrder(self, d):
@@ -43,21 +44,12 @@ class Node:
                 self.right.insertInOrder(d)
         self.size += 1
 
-    def find(self, d):
-        if d == self.data:
-            return self
-        elif d <= self.data:
-            return None if self.left == None else self.left.find(d)
-        else:
-            return None if self.right == None else self.right.find(d)
-
-
 class Tree:
     def __init__(self):
         self.root = None
 
     def getRandomNode(self):
-        if self.root == None:
+        if self.root is None:
             return None
         return self.root.getRandom()
 
