@@ -11,7 +11,7 @@ def pre_order(root):
 
     def help(node):
         if not node:
-            result.append("X")
+            result.append("X") # X is a placeholder for None
             return
         result.append(str(node.data))
         help(node.left)
@@ -69,6 +69,5 @@ if __name__ == "__main__":
     t2.root.right = Node(7)
     t2.root.left.right = Node(8)
     t2.root.right.right = Node(9)
-    t1.print()
-    t2.print()
+
     print(checkIfsubTree(t1.root, t2.root))
