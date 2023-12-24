@@ -43,8 +43,7 @@ def _next_parent_node(node: TreeNode):
 
 
 if __name__ == "__main__":
-    tree = Tree()
-    tree.root = Tree.construct_binary_tree_from_list([1, 2, 3, 4, 5, 6, 7, 8, 9], with_parent=True)
+    tree  = Tree.construct_binary_tree_from_list([1, 2, 3, 4, 5, 6, 7, 8, 9], with_parent=True)
 
     print(tree.root.left.left.data)
 
