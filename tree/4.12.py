@@ -52,12 +52,9 @@ def __countPathWithSumOptimized(root, targetSum, runningSum, pathCount):
 
     return totalPaths
 
-
 def incrementHashTable(pathCount, key, delta):
-    newCount = pathCount.get(key, 0) + delta
-    if newCount == 0:
-        pathCount.pop(key)
-    else:
+    newCount = pathCount.pop(key, 0) + delta
+    if newCount != 0:
         pathCount[key] = newCount
 
 
