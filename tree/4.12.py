@@ -63,7 +63,7 @@ def incrementHashTable(pathCount, key, delta):
 
 # optimized DFS method
 """
-       we are using current sum + target sum as the key because we are looking for the number of paths that sum up to target sum
+       we are using current sum + target sum as the key because we are looking for the number of paths that sums up to `target` sum
        so if we have a path that sums up to current sum + target sum, then we have a path that sums up to target sum
        example
        target sum = 8
@@ -92,7 +92,7 @@ def incrementHashTable(pathCount, key, delta):
            .........
            after right nodes are done, we pop the currentSum + targetSum from the lookup table to avoid counting the same path twice
        """
-def countPathWithSumOptimized(root, targetSum):
+def countPathWithSumOptimized2(root, targetSum):
     total = 0
     lookup = collections.defaultdict(int)
 
@@ -125,5 +125,4 @@ if __name__ == "__main__":
     tree.root.left.right.right = Node(1)
     tree.root.right.right = Node(11)
     
-    #print(countPathWithSumOptimized(tree.root, 8))
-    print(countPathWithSumOptimized(tree.root, 8))
+    print(countPathWithSumOptimized2(tree.root, 8))
