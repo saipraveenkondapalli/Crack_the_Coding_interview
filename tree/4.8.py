@@ -11,7 +11,7 @@ Avoid storing additional nodes in a data structure. NOTE: This is not necessaril
 Design custom Node class
 """
 
-from tree_linked_in import Tree, Node
+from tree import Tree, TreeNode as Node 
 
 
 def depth(node):
@@ -37,7 +37,7 @@ def commonAncestor(p, q):
     while (first != second and first != None and second != None):
         first = first.parent
         second = second.parent
-    return None if (first == None or second == None) else first
+    return first or second
 
 
 """
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     tree.root.left.left.parent = tree.root.left
     tree.root.left.right = Node(5)
     tree.root.left.right.parent = tree.root.left
-    tree.print()
+    
     p, q = tree.root.left.left, tree.root.left.right  # 4,5
     # ans = commonAncestor2(p,q)   with links to the parent
     # ans = commonAncestor(p,q)  # with links to the parent
