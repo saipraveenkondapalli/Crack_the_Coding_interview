@@ -4,6 +4,31 @@ Check Subtree: T1 is a large tree, check whether T2 is a subtree of T1
 
 from tree_linked_in import Tree, Node
 
+# simple solution
+
+def pre_order(root):
+    result = []
+
+    def help(node):
+        if not node:
+            result.append("X")
+            return
+        result.append(str(node.data))
+        help(node.left)
+        help(node.right)
+
+    help(root)
+    return result
+
+
+def is_subtree(t1, t2):
+    order1 = pre_order(t1)
+    order2 = pre_order(t2)
+    print(order1, order2)
+    return "".join(order1).find("".join(order2)) != -1
+
+
+
 def  checkIfsubTree(t1, t2):
     # Run time complexity is O(n+m) where n is the number of nodes in t1 and m is the number of nodes in t2
     string1 = []

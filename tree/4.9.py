@@ -1,50 +1,88 @@
 """
-Check Sub Tree: T1 and T2 are two very large binary trees, with T1 much bigger than T2. Create an
-algorithm to determine if T2 is a subtree of T1.
-A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree of n is identical to T2.
-That is, if you cut off the tree at node n, the two trees would be identical.
+BST Sequences: A binary search tree was created by traversing through an array from left to right
+and inserting each element. Given a binary search tree with distinct elements, print all possible
+arrays that could have led to this tree.
 """
 
-from tree import Tree, Node
+from .tree import Tree, TreeNode
 
 
-# simple solution
+def bst_sequences(root):
+    """
+    Generate all possible arrays that could have led to this Binary Search Tree (BST).
 
-def pre_order(root):
+    Args:
+        root (TreeNode): The root node of the BST.
+
+    Returns:
+        List[List[int]]: A list of all possible arrays that could have led to this BST.
+    """
+    if not root:
+        # Base case: if root is None, return a list containing an empty list.
+        return [[]]
+
+    # Prefix stores the current node's data.
+    prefix = [root.data]
+
+    # Recursively call bst_sequences on the left and right subtrees.
+    left = bst_sequences(root.left)
+    right = bst_sequences(root.right)
+
     result = []
 
-    def help(node):
-        if not node:
-            result.append("X")
-            return
-        result.append(str(node.data))
-        help(node.left)
-        help(node.right)
-
-    help(root)
+    # Iterate over all combinations of sequences from the left and right subtrees
+    for l in left:
+        for r in right:
+            # Initialize an empty list to store the weaved lists
+            weaved = []
+            # Weave together the current left and right sequences with the prefix, in all possible ways
+            weave_lists(l, r, weaved, prefix)
+            # Add the weaved sequences to the result
+            result.extend(weaved)
+    # Return the result
     return result
 
 
-def is_subtree(t1, t2):
-    order1 = pre_order(t1)
-    order2 = pre_order(t2)
-    print(order1, order2)
-    return "".join(order1).find("".join(order2)) != -1
+def weave_lists(first, second, results, prefix):
+    """
+    Helper function to weave together two lists in all possible ways while maintaining their relative order using backtracking.
+
+    Args:
+        first (List[int]): The first list.
+        second (List[int]): The second list.
+        results (List[List[int]]): The list to store the weaved lists.
+        prefix (List[int]): The prefix to append before each weaved list.
+    """
+    # If either list is empty, append the remaining elements of the other list to prefix and add the result to results.
+    if not first or not second:
+        result = prefix[:]
+        result.extend(first)
+        result.extend(second)
+        results.append(result)
+        return
+
+    # Remove the first element from first, add it to prefix, and recursively call weave_lists.
+    # This is exploring all weavings that start with an element from first.
+    head_first = first.pop(0)
+    prefix.append(head_first)
+    weave_lists(first, second, results, prefix)
+    # After the recursive call, remove the added element from prefix and add it back to first.
+    # This is the "backtracking" step, undoing the previous choice.
+    prefix.pop()
+    first.insert(0, head_first)
+
+    # Do the same thing for second, exploring all weavings that start with an element from second.
+    head_second = second.pop(0)
+    prefix.append(head_second)
+    weave_lists(first, second, results, prefix)
+    # Again, undo the choice after exploring all possibilities. This is the second "backtracking" step.
+    prefix.pop()
+    second.insert(0, head_second)
 
 
 if __name__ == "__main__":
-    t1 = Tree()
-    t1.root = Node(1)
-    t1.root.left = Node(2)
-    t1.root.right = Node(3)
-    t1.root.left.left = Node(4)
-    t1.root.left.right = Node(5)
-    t1.root.right.left = Node(6)
-    t1.root.right.right = Node(7)
-
-    t2 = Tree()
-    t2.root = Node(2)
-    t2.root.left = Node(4)
-    t2.root.right = Node(5)
-
-    print(is_subtree(t1.root, t2.root))
+    t = Tree()
+    t.root = TreeNode(2)
+    t.root.left = TreeNode(1)
+    t.root.right = TreeNode(3)
+    print(bst_sequences(t.root))
