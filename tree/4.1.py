@@ -1,5 +1,9 @@
 from graph import Graph
 
+"""
+For a given directed graph, design an algorithm to find out whether a route exists between two nodes.
+"""
+
 
 def check_whether_route_exists(graph, source, destination):
     visited = set()
@@ -20,11 +24,10 @@ def check_whether_route_exists(graph, source, destination):
 
 if __name__ == "__main__":
     g = Graph()
-    g.addEdge(0, 1) 
-    g.addEdge(1, 2)
-    g.addEdge(2, 3)
-    g.addEdge(4, 2)
-    g.addEdge(3, 4)
-    g.addEdge(4, 5)
-    g.addEdge(5, 6)
-    print(check_whether_route_exists(g.graph, 6, 0))
+    g.add_edge(0, 1)
+    g.add_edge(1, 2)
+    g.add_edge(2, 3)
+    g.add_edge(4, 2)
+    g.add_edge(3, 4)
+    g.add_edge(4, 5)
+    g.add_edge(5, 6)

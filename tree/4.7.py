@@ -23,9 +23,9 @@ from graph import Graph
 def build_graph(projects, dependencies):
     graph = Graph()
     for project in projects:
-        graph.addVertex(project)
+        graph.add_vertex(project)
     for dependency in dependencies:
-        graph.addEdge(dependency[0], dependency[1])
+        graph.add_edge(dependency[0], dependency[1])
     return graph
 
 
