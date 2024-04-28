@@ -3,18 +3,17 @@ Check if a given binary tree is a valid binary search tree.
 
 """
 
-from tree import Tree, TreeNode
+from utils import Tree, TreeNode
 
 
-def Check_BST1(root):
-    if root is None:
+def check_bst(root):
+    if not root:
         return True
     if root.left and root.left.data >= root.data:
         return False
     if root.right and root.right.data < root.data:
         return False
-    if not Check_BST1(root.left) or not Check_BST1(root.right): # same as if Check_BST1(root.left) == False or Check_BST1(root.right) == False:
-
+    if not check_bst(root.left) or not check_bst(root.right):
         return False
     return True
 
@@ -26,5 +25,5 @@ if __name__ == "__main__":
     tree.root.right = TreeNode(50)
     tree.root.left.left = TreeNode(25)
     tree.root.left.right = TreeNode(36)
-    
-    print(Check_BST1(tree.root))
+
+    print(check_bst(tree.root))

@@ -1,40 +1,39 @@
 class TrieNode:
     def __init__(self) -> None:
         self.children = [None] * 26
-        self.endOfWord = False
+        self.end_of_word = False
 
 
 class Trie:
     def __init__(self) -> None:
         self.root = TrieNode()
 
-    def _getNode(self):
+    def _get_node(self):
         return TrieNode()
 
-    def _charToindex(self, char):
+    def _char_to_index(self, char):
         return ord(char) - ord('a')
 
     def insert(self, key):
         cur = self.root
         length = len(key)
         for x in range(length):
-            index = self._charToindex(key[x])
+            index = self._char_to_index(key[x])
             if not cur.children[index]:
-                cur.children[index] = self._getNode()
+                cur.children[index] = self._get_node()
             cur = cur.children[index]
-        cur.endOfWord = True
+        cur.end_of_word = True
 
     def search(self, key):
         cur = self.root
         length = len(key)
         for x in range(length):
-            index = self._charToindex(key[x])
+            index = self._char_to_index(key[x])
             if not cur.children[index]:
                 return False
             cur = cur.children[index]
 
-        return cur and cur.endOfWord
-
+        return cur and cur.end_of_word
 
 
 if __name__ == "__main__":

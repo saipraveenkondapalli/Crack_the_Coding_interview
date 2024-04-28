@@ -8,6 +8,9 @@ class TreeNode:
         self.right = None
         self.parent = None
 
+    def __str__(self):
+        return f"{self.data}"
+
 
 class Tree:
     """
@@ -48,7 +51,29 @@ class Tree:
         return max(self._height(root.left), self._height(root.right)) + 1
 
     @staticmethod
-    def construct_binary_tree_from_list(arr: list, with_parent=False):
+    def in_order_traversal(root, res=None):
+        """
+        Perform in-order traversal of the binary tree.
+
+        Args:
+            res:  A list to store the elements in in-order traversal.
+            root: The binary tree to traverse.
+
+        Returns:
+            A list of elements in the binary tree in in-order traversal.
+        """
+        if res is None:
+            res = []
+        if root is None:
+            return
+
+        Tree.in_order_traversal(root.left, res)
+        res.append(root.data)
+        Tree.in_order_traversal(root.right, res)
+        return res
+
+    @staticmethod
+    def construct_binary_tree_from_list(arr: list, with_parent: bool = False) -> 'Tree':
         """
         Constructs a binary tree from a sorted list.
 

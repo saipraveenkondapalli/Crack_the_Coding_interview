@@ -7,7 +7,8 @@ class Graph:
             self.graph[s].append(d)
         except KeyError:  # if s is not in graph
             self.graph[s] = [d]  # add s to graph and add d to s's list
-            self.graph[d] = []  # add destination vertex to the graph
+            if d not in self.graph:
+                self.graph[d] = []
 
     def add_vertex(self, v):
         self.graph[v] = []

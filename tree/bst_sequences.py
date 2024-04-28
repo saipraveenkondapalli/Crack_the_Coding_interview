@@ -4,7 +4,8 @@ and inserting each element. Given a binary search tree with distinct elements, p
 arrays that could have led to this tree.
 """
 
-from tree import Tree, TreeNode
+from utils import Tree, TreeNode
+from collections import deque
 
 
 def bst_sequences(root):
@@ -62,7 +63,7 @@ def weave_lists(first, second, results, prefix):
         return
 
     # Remove the first element from first, add it to prefix, and recursively call weave_lists.
-    # This is exploring all weavings that start with an element from first.
+    # This is exploring all weaves that start with an element from first.
     head_first = first.pop(0)
     prefix.append(head_first)
     weave_lists(first, second, results, prefix)
@@ -71,7 +72,7 @@ def weave_lists(first, second, results, prefix):
     prefix.pop()
     first.insert(0, head_first)
 
-    # Do the same thing for second, exploring all weavings that start with an element from second.
+    # Do the same thing for second, exploring all weaving's that start with an element from second.
     head_second = second.pop(0)
     prefix.append(head_second)
     weave_lists(first, second, results, prefix)

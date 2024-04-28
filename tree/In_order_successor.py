@@ -4,7 +4,8 @@ binary search tree. You may assume that each node has a link to its parent.
 
 """
 
-from tree import Tree, TreeNode
+from utils import Tree, TreeNode
+
 
 def next_in_order_node(node: TreeNode):
     if node is None:
@@ -14,6 +15,7 @@ def next_in_order_node(node: TreeNode):
         return _left_most_node(node.right)
 
     return _next_parent_node(node)
+
 
 def _left_most_node(node: TreeNode):
     if node is None:
@@ -38,14 +40,9 @@ def _next_parent_node(node: TreeNode):
     return _next_parent_node(node.parent)
 
 
-
-
-
-
 if __name__ == "__main__":
-    tree  = Tree.construct_binary_tree_from_list([1, 2, 3, 4, 5, 6, 7, 8, 9], with_parent=True)
+    tree = Tree.construct_binary_tree_from_list([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], with_parent=True)
 
-    print(tree.root.left.left.data)
+    print(Tree.in_order_traversal(tree.root))
 
-    print(next_in_order_node(tree.root.left.left).data)
-
+    print(next_in_order_node(tree.root.right.left).data)

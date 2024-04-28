@@ -17,10 +17,10 @@ def sum_lists(l1, l2):
     len2 = len(l2)
     if len1 > len2:
         for x in range(len1 - len2):
-            l2.appendAthead(0) # add zeros to the head of the shorter list
+            l2.append_at_head(0) # add zeros to the head of the shorter list
     elif len2 > len1:
         for x in range(len2 - len1):
-            l1.appendAthead(0) # add zeros to the head of the shorter list
+            l1.append_at_head(0) # add zeros to the head of the shorter list
     sum_linked_list = LinkedList()
     carry = 0
     cur_node1 = l1.head

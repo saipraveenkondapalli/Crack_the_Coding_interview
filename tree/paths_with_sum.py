@@ -1,61 +1,70 @@
 import collections
 
-from tree import Tree, TreeNode as Node
+from utils import Tree, TreeNode as Node
+
+"""
+Paths with Sum: You are given a binary tree in which each node contains an integer value (which might be positive 
+or negative). Design an algorithm to count the number of paths that sum to a given value. The path does not need to 
+start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).
+"""
 
 
 # Run time is O(N log N) where N is the number of nodes in the tree
-def CountPathWithSumFromRoot(node, targetSum, currentSum):
-    if not node: return 0
+def count_path_with_sum_from_root(node, target_sum, current_sum):
+    if not node:
+        return 0
 
-    currentSum += node.data
+    current_sum += node.data
     count = 0
-    if currentSum == targetSum:
+    if current_sum == target_sum:
         count += 1
-    count += CountPathWithSumFromRoot(node.left, targetSum, currentSum)
-    count += CountPathWithSumFromRoot(node.right, targetSum, currentSum)
+    count += count_path_with_sum_from_root(node.left, target_sum, current_sum)
+    count += count_path_with_sum_from_root(node.right, target_sum, current_sum)
 
     return count
 
 
-def countPathWithSum(root, targetSum):
-    if root is None: return 0
+def count_path_with_sum(root, target_sum):
+    if root is None:
+        return 0
 
-    pathsFromRoot = CountPathWithSumFromRoot(root, targetSum, 0)
+    paths_from_root = count_path_with_sum_from_root(root, target_sum, 0)
 
-    leftPaths = countPathWithSum(root.left, targetSum)
-    rightPaths = countPathWithSum(root.right, targetSum)
+    left_paths = count_path_with_sum(root.left, target_sum)
+    right_paths = count_path_with_sum(root.right, target_sum)
 
-    return pathsFromRoot + leftPaths + rightPaths
+    return paths_from_root + left_paths + right_paths
 
 
 # Optimized solution, use a hash table to store the number of paths that sum up to a certain value
 # Run time is O(N) where N is the number of nodes in the tree
 
-def countPathWithSumOptimized(root, targetSum):
-    return __countPathWithSumOptimized(root, targetSum, 0, {})
+def count_path_with_sum_optimized(root, target_sum):
+    return __count_path_with_sum_optimized(root, target_sum, 0, {})
 
 
-def __countPathWithSumOptimized(root, targetSum, runningSum, pathCount):
+def __count_path_with_sum_optimized(root, target_sum, running_sum, path_count):
     if root is None: return 0
 
-    runningSum += root.data
-    sum = runningSum - targetSum
-    totalPaths = pathCount.get(sum, 0)
+    running_sum += root.data
+    total_sum = running_sum - target_sum
+    total_paths = path_count.get(total_sum, 0)
 
-    if runningSum == targetSum:
-        totalPaths += 1
+    if running_sum == target_sum:
+        total_paths += 1
 
-    incrementHashTable(pathCount, runningSum, 1)
-    totalPaths += __countPathWithSumOptimized(root.left, targetSum, runningSum, pathCount)
-    totalPaths += __countPathWithSumOptimized(root.right, targetSum, runningSum, pathCount)
-    incrementHashTable(pathCount, runningSum, -1)
+    increment_hash_table(path_count, running_sum, 1)
+    total_paths += __count_path_with_sum_optimized(root.left, target_sum, running_sum, path_count)
+    total_paths += __count_path_with_sum_optimized(root.right, target_sum, running_sum, path_count)
+    increment_hash_table(path_count, running_sum, -1)
 
-    return totalPaths
+    return total_paths
 
-def incrementHashTable(pathCount, key, delta):
-    newCount = pathCount.pop(key, 0) + delta
-    if newCount != 0:
-        pathCount[key] = newCount
+
+def increment_hash_table(path_count, key, delta):
+    new_count = path_count.pop(key, 0) + delta
+    if new_count != 0:
+        path_count[key] = new_count
 
 
 # optimized DFS method
@@ -89,22 +98,25 @@ def incrementHashTable(pathCount, key, delta):
            .........
            after right nodes are done, we pop the currentSum + targetSum from the lookup table to avoid counting the same path twice
        """
-def countPathWithSumOptimized2(root, targetSum):
+
+
+def count_path_with_sum_optimized2(root, target_sum):
     total = 0
     lookup = collections.defaultdict(int)
 
-    lookup[targetSum] = 1
+    lookup[target_sum] = 1
 
-    def dfs(node, currentSum):
+    def dfs(node, current_sum):
         nonlocal total
-        if not node: return
-        currentSum += node.data
-        total += lookup[currentSum]
-        lookup[currentSum + targetSum] += 1
+        if not node:
+            return
+        current_sum += node.data
+        total += lookup[current_sum]
+        lookup[current_sum + target_sum] += 1
 
-        dfs(node.left, currentSum)
-        dfs(node.right, currentSum)
-        lookup.pop(currentSum + targetSum)
+        dfs(node.left, current_sum)
+        dfs(node.right, current_sum)
+        lookup.pop(current_sum + target_sum)
 
     dfs(root, 0)
     return total
@@ -121,5 +133,5 @@ if __name__ == "__main__":
     tree.root.left.left.right = Node(-2)
     tree.root.left.right.right = Node(1)
     tree.root.right.right = Node(11)
-    
-    print(countPathWithSumOptimized2(tree.root, 8))
+
+    print(count_path_with_sum_optimized2(tree.root, 8))

@@ -1,3 +1,5 @@
+from utils import Graph
+
 """
 Build Order:
 You are given a list of projects and a list of dependencies (which is a list of pairs of projects,
@@ -17,10 +19,8 @@ Output: f, e, a, b, d, c
 Refer topological sort in graph.py
 """
 
-from graph import Graph
 
-
-def build_graph(projects, dependencies):
+def build_graph(projects: list, dependencies: list) -> Graph:
     graph = Graph()
     for project in projects:
         graph.add_vertex(project)
@@ -29,13 +29,13 @@ def build_graph(projects, dependencies):
     return graph
 
 
-def build_order(projects: list, dependencies:list) -> list:
+def build_order(projects: list, dependencies: list) -> list:
     graph = build_graph(projects, dependencies)
+    print(graph)
     return graph.topological_sort()
 
 
 if __name__ == "__main__":
-    projects = ["a", "b", "c", "d", "e", "f"]
-    dependencies = [("a", "d"), ("f", "b"), ("b", "d"), ("f", "a"), ("d", "c")]
-    print(build_order(projects, dependencies))
-
+    test_projects = ["a", "b", "c", "d", "e", "f"]
+    test_dependencies = [("a", "d"), ("f", "b"), ("b", "d"), ("f", "a"), ("d", "c")]
+    print(build_order(test_projects, test_dependencies))

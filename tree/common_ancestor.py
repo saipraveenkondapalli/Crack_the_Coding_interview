@@ -1,3 +1,5 @@
+from utils import Tree, TreeNode as Node
+
 """
 Common Ancestor: Design an algorithm and write code to find the first common ancestor of two nodes in a binary tree.
 Avoid storing additional nodes in a data structure. NOTE: This is not necessarily a binary search tree.
@@ -11,39 +13,43 @@ Avoid storing additional nodes in a data structure. NOTE: This is not necessaril
 Design custom Node class
 """
 
-from tree import Tree, TreeNode as Node 
 
+def depth(node: Node) -> int:
+    """
+    Get the depth of a node from the root
+    Args:
+        node: TreeNode
 
-def depth(node):
-    d = 0
+    Returns:  depth of the node from the root
+    """
+    distance = 0
     while node:
         node = node.parent
-        d += 1
-    return d
+        distance += 1
+    return distance
 
 
-def goUp(node, delta):
+def go_up(node, delta):
     while delta > 0 and node:
         node = node.parent
         delta -= 1
     return node
 
 
-def commonAncestor(p, q):
+def common_ancestor(p, q):
     delta = depth(p) - depth(q)
     first = q if delta > 0 else p  # get shallower node
     second = p if delta > 0 else q  # get deeper node
-    second = goUp(second, abs(delta))  # move deeper node up
-    while (first != second and first != None and second != None):
+    second = go_up(second, abs(delta))  # move deeper node up
+    print(delta, first, second)
+    while first != second and first and second:
         first = first.parent
         second = second.parent
     return first or second
 
 
 """
- 
 we could also trace p's path upwards and check if q is on that path.
- 
 """
 
 
@@ -56,14 +62,14 @@ def covers(root, p):  # check if p is on the path from root to p, helper functio
 
 
 # ------------------------------------------------- Solution 3 -------------------------------------------------
-def getSibilings(node):  # helper function for solution2, get the sibling of a node
-    if node == None or node.parent == None:
+def get_siblings(node):  # helper function for solution2, get the sibling of a node
+    if node is None or node.parent is None:
         return None
     parent = node.parent
     return parent.right if parent.left == node else parent.left
 
 
-def commonAncestor2(root, p, q):  # solution 2
+def common_ancestor2(root, p, q):  # solution 2
     if not covers(root, p) or not covers(root, q):  # Error check - one node is not in tree
         return None
     elif covers(p, q):
@@ -71,33 +77,33 @@ def commonAncestor2(root, p, q):  # solution 2
     elif covers(q, p):
         return q
 
-    sibling = getSibilings(p)
-    parent = p.parent
+    sibling = get_siblings(p)
+    parent_node = p.parent
     while not covers(sibling, q):
-        sibling = getSibilings(parent)
-        parent = parent.parent
-    return parent
+        sibling = get_siblings(parent_node)
+        parent_node = parent_node.parent
+    return parent_node
 
 
 # Solution 3
 # Runtime: O(n) for a balanced tree
-def withoutParent(root, p, q):  # solution 3, without parent pointer
+def without_parent(root, p, q):  # solution 3, without parent pointer
     if not covers(root, p) or not covers(root, q):
         return None
-    return ancestorHelper(root, p, q)
+    return ancestor_helper(root, p, q)
 
 
-def ancestorHelper(root, p, q):
-    if root == None or root == p or root == q:
+def ancestor_helper(root, p, q):
+    if root is None or root == p or root == q:
         return root
 
-    pIsOnLeft = covers(root.left, p)
-    qIsOnLeft = covers(root.left, q)
-    if pIsOnLeft != qIsOnLeft:
+    p_is_on_left = covers(root.left, p)
+    q_is_on_left = covers(root.left, q)
+    if p_is_on_left != q_is_on_left:
         return root
 
-    childSide = root.left if pIsOnLeft else root.right
-    return ancestorHelper(childSide, p, q)
+    child_side = root.left if p_is_on_left else root.right
+    return ancestor_helper(child_side, p, q)
 
 
 # ------------------------------------------------- Solution 4 -------------------------------------------------
@@ -114,12 +120,4 @@ if __name__ == "__main__":
     tree.root.left.left.parent = tree.root.left
     tree.root.left.right = Node(5)
     tree.root.left.right.parent = tree.root.left
-    
-    p, q = tree.root.left.left, tree.root.left.right  # 4,5
-    # ans = commonAncestor2(p,q)   with links to the parent
-    # ans = commonAncestor(p,q)  # with links to the parent
-    ans = withoutParent(tree.root, p, q)  # without links to the parent
-    if ans:
-        print(f"The common ancestor of {p.data} and {q.data} is {ans.data}")
-    else:
-        print(f"No common ancestor for {p.data} and {q.data}")
+
