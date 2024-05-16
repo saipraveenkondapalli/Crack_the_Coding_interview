@@ -19,7 +19,6 @@ def check_whether_route_exists(graph, source, destination) -> bool:
     queue: deque = deque()
     queue.append(source)
     visited.add(source)
-    print(graph)
     while queue:
         cur = queue.popleft()
         for neighbour in graph[cur]:
