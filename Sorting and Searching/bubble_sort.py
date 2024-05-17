@@ -18,6 +18,6 @@ def bubble_sort(arr: list):
 
 
 if __name__ == "__main__":
-    arr = [456, 123, 789, 0, 1, 2, 3, 3, -5, 3, 7, 8, 9]
-    bubble_sort(arr)
-    print(arr)
+    sample_arr = [456, 123, 789, 0, 1, 2, 3, 3, -5, 3, 7, 8, 9]
+    bubble_sort(sample_arr)
+    print(sample_arr)

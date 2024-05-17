@@ -1,8 +1,8 @@
 """
 
-Next Number:
+5.4 Next Number:
 Given a positive integer, print the next smallest and the next largest number that
-have the same number of 1 bits in their binary representation.
+have the same number of 1 bit in their binary representation.
 Example:
 Input: 13948 (or: 1101 0100 1100 0100)
 Output: 13971, 13967 # 1101 0100 1110 0011, 1101 0100 1100 0111
@@ -10,7 +10,7 @@ Output: 13971, 13967 # 1101 0100 1110 0011, 1101 0100 1100 0111
 """
 
 
-def nextLargest(n):
+def next_largest(n):
     c = n
     c0 = 0
     c1 = 0
@@ -23,13 +23,13 @@ def nextLargest(n):
     if c0 + c1 == 31 or c0 + c1 == 0:
         return -1
     p = c0 + c1
-    n |= (1 << p)
-    n &= ~((1 << p) - 1)
-    n |= (1 << (c1 - 1)) - 1
-    return n  # returns the next largest number with the same number of 1 bits
+    n |= (1 << p)  # flip the rightmost non-trailing zero
+    n &= ~((1 << p) - 1)  # clear all bits to the right of p
+    n |= (1 << (c1 - 1)) - 1  # insert (c1-1) ones on the right
+    return n  # returns the next largest number with the same number of 1s
 
 
-def nextSmallest(n):
+def next_smallest(n):
     temp = n
     c0 = 0
     c1 = 0
@@ -41,7 +41,7 @@ def nextSmallest(n):
     while (temp & 1) == 0 and temp != 0:
         c0 += 1
         temp >>= 1
-    p = c0 + c1 # position of rightmost non-trailing one
+    p = c0 + c1  # position of rightmost non-trailing one
     n &= ((~0) << (p + 1))  # clears from bit p onwards
 
     mask = (1 << (c1 + 1)) - 1  # sequence of (c1+1) ones right aligned to p
@@ -50,12 +50,9 @@ def nextSmallest(n):
     return n  # returns the next smallest number with the same number of 1 bits
 
 
-def nextSmallestAndLargest(n):
-    return [nextSmallest(n), nextLargest(n)]
+def next_smallest_and_largest(n):
+    return [next_smallest(n), next_largest(n)]
 
 
 if __name__ == "__main__":
-    # print(nextSmallestAndLargest(13948))
-    # print(nextSmallestAndLargest(13967))
-    # print(nextSmallestAndLargest(0))
-    print(nextSmallestAndLargest(6))
+    print(next_smallest_and_largest(10))

@@ -1,6 +1,4 @@
 
-# get Bit
-
 def get_bit(num, i):
     return (num & (1 << i)) != 0
 

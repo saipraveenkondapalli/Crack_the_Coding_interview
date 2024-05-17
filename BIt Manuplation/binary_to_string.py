@@ -4,31 +4,32 @@ print the binary representation. If the number cannot be represented accurately 
 print "ERROR:'
 """
 
-def binaryToString(num):
-    if num >= 1 or num <=0:
+
+def binary_to_string(num):
+    if num >= 1 or num <= 0:
         return "ERROR"
     binary = ['.']
-    if len(binary) >= 32:
-        return "ERROR"
-
 
     while num > 0:
+        if len(binary) >= 32:
+            return "ERROR"
+
         r = num * 2
-        if r >=1:
+        if r >= 1:
             binary.append('1')
-            num = r-1
+            num = r - 1
         else:
             binary.append('0')
             num = r
 
     return ''.join(binary)
 
-def binaryToString2(num):
-    if num >= 1 or num <=0:
+
+def binary_to_string2(num):
+    if num >= 1 or num <= 0:
         return "ERROR"
     binary = ['.']
-    if len(binary) >= 32:
-        return "ERROR"
+
     frac = 0.5
     while num > 0:
         if len(binary) >= 32:
@@ -43,7 +44,6 @@ def binaryToString2(num):
     return ''.join(binary)
 
 
-
 if __name__ == "__main__":
-    print(binaryToString(0.75))
-    print(binaryToString2(0.75))
+    print(binary_to_string(0.75))
+    print(binary_to_string2(0.75))

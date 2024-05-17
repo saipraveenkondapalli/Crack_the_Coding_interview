@@ -35,6 +35,6 @@ def partition(arr, low, high):
 
 
 if __name__ == "__main__":
-    arr = [-5, 3, 7, 8, 9]
-    quick_sort(arr)
-    print(arr)
+    sample = [-5, 3, 7, 8, 9]
+    quick_sort(sample)
+    print(sample)
