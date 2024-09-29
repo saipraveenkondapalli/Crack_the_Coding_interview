@@ -14,6 +14,14 @@ def bit_swap_required(a, b):
     return count
 
 
+def bit_swap_count_c_to_zero_approach(a, b):
+    count = 0
+    c = a ^ b
+    while c:
+        count += 1
+        c &= c - 1
+    return count
+
 if __name__ == "__main__":
     print(bit_swap_required(29, 15))  # 2
     print(bit_swap_required(29, 0))  # 4
