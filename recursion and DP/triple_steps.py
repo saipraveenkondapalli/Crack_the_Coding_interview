@@ -27,8 +27,10 @@ def triple_steps_optimized_helper(n, memo):
     if memo[n] != -1:
         return memo[n]
     else:
-        return (triple_steps_optimized_helper(n - 1, memo) + triple_steps_optimized_helper(n - 2, memo) +
-                triple_steps_optimized_helper(n - 3, memo))
+        memo[n] = (triple_steps_optimized_helper(n - 1, memo) +
+                   triple_steps_optimized_helper(n - 2, memo) +
+                   triple_steps_optimized_helper(n - 3, memo))
+        return memo[n]
 
 
 if __name__ == "__main__":
