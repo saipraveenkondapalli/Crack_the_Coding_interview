@@ -46,7 +46,7 @@ def magic_index_helper_not_distinct(array, left, right):
 
 
 if __name__ == "__main__":
-    array = [-1, -2, 0, 3, 7, 8, 10, 11, 15]
-    print(magic_index(array))  # 3
-    array = [-1, -2, 0, 3, 3, 3, 3, 3, 3]
-    print(magic_index_not_distinct(array))  # 3
+    a = [-1, -2, 0, 3, 7, 8, 10, 11, 15]
+    print(magic_index(a))  # 3
+    a = [-1, -2, 0, 3, 3, 3, 3, 3, 3]
+    print(magic_index_not_distinct(a))  # 3
