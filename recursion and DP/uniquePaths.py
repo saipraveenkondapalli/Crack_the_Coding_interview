@@ -25,6 +25,8 @@ class Solution:
                 memo[i][j] = memo[i - 1][j] + memo[i][j - 1]
 
         return memo[m - 1][n - 1]
+
+
 # unique paths II
 class Solution2:
     def uniquePathsWithObstacles(self, grid) -> int:
@@ -57,7 +59,6 @@ class Solution2:
 if __name__ == "__main__":
     s = Solution()
     print(s.UniquePaths(3, 3))
-    path = [[0,0,0],[0,1,0],[0,0,0]]
+    path = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
     s2 = Solution2()
     print(s2.uniquePathsWithObstacles(path))
-
