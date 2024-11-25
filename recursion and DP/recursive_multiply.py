@@ -24,6 +24,29 @@ def multiply_helper1(big, small):
         return halfProduct + halfProduct + big  # double it and add the big number to it
 
 
+# memiozation solution
+
+def multiply_helper2(big, small, memo=[]):
+    if small == 0:
+        return 0
+    elif small == 1:
+        return big
+
+    elif memo[small] > 0:
+        return memo[small]
+
+    small >>= 1  # divide by 2
+
+    half_product = multiply_helper2(big, small, memo)
+
+    if small % 2 == 0:  # small is even
+        memo[small] = half_product + half_product
+    else:
+        memo[small] = half_product + half_product + big
+
+    return memo[small]
+
+
 # optimized solution
 def multiply2(a, b):
     result = 0
