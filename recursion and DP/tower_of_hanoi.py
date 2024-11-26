@@ -14,15 +14,15 @@ Runtime: O(2^n) because we are doing 2 recursive calls each time until we reach 
 
 def tower_of_hanoi(n, source, dest, buffer):
     if n <= 0: return
-    tower_of_hanoi(n-1, source, buffer, dest)
+    tower_of_hanoi(n - 1, source, buffer, dest)
     dest.append(source.pop())
-    tower_of_hanoi(n-1, buffer, dest, source)
+    tower_of_hanoi(n - 1, buffer, dest, source)
     return dest
 
 
 if __name__ == "__main__":
-    n = 5
-    source = [i for i in range(n, 0, -1)] # [5, 4, 3, 2, 1]
+    n = 2
+    source = list(range(n, 0, -1))  # [5, 4, 3, 2, 1]
     dest = []
     buffer = []
     print(source, dest, buffer)

@@ -10,7 +10,6 @@ Time Complexity: O(n*2^n)
 
 
 def power_set(set):
-
     if len(set) == 0:
         return [[]]
     else:
@@ -20,5 +19,19 @@ def power_set(set):
         return subset + new_set
 
 
+def power_set_recursion(data):
+    res = []
+
+    def backtrack(start, path):
+        res.append(path)
+
+        for i in range(start, len(data)):
+            backtrack(i + 1, path + [data[i]])
+
+    backtrack(0, [])
+    return res
+
+
 if __name__ == "__main__":
     print(power_set([1, 2, 3]))  # [[], [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]
+    print(power_set_recursion([1, 2, 3]))  # [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
