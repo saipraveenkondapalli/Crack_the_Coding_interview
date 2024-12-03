@@ -12,29 +12,29 @@ Merge Sort:
 
 # Algorithm explanation: https://www.youtube.com/watch?v=MZaf_9IZCrc
 
-
 def merge_sort(arr: list):
-    help = []
+    # Create a helper array to store the sorted elements
+    help = [0] * len(arr)
     _helper(arr, help, 0, len(arr) - 1)
-
 
 def _helper(arr, help, low, high):
     if low < high:
         mid = (low + high) // 2
-        _helper(arr, help, low, mid)
-        _helper(arr, help, mid + 1, high)
-        merge(arr, help, low, mid, high)
-
+        _helper(arr, help, low, mid)        # Sort the left half
+        _helper(arr, help, mid + 1, high)   # Sort the right half
+        merge(arr, help, low, mid, high)    # Merge the sorted halves
 
 def merge(arr, help, low, mid, high):
     # Copy both parts into the help array
     for i in range(low, high + 1):
-        help.append(arr[i])
+        help[i] = arr[i]  # Use the index to copy to the help array
+
     helper_left = low
     helper_right = mid + 1
     current = low
-    # Iterate through the help array. Compare the left and right half, copying back the smaller element from the two
-    # halves into the original array.
+
+    # Iterate through the help array. Compare the left and right half,
+    # copying back the smaller element from the two halves into the original array.
     while helper_left <= mid and helper_right <= high:
         if help[helper_left] <= help[helper_right]:
             arr[current] = help[helper_left]
@@ -43,11 +43,11 @@ def merge(arr, help, low, mid, high):
             arr[current] = help[helper_right]
             helper_right += 1
         current += 1
+
     # Copy the rest of the left side of the array into the target array
     remaining = mid - helper_left
     for i in range(remaining + 1):
         arr[current + i] = help[helper_left + i]
-
 
 if __name__ == "__main__":
     sample_arr = [456, 123, 789, 0, 1, 2, 3, 3, -5, 3, 7, 8, 9]

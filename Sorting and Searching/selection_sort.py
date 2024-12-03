@@ -8,7 +8,7 @@ Selection sort
     - Stable: No
 """
 
-def selection_sort(arr):
+def selection_sort(arr:list):
     n = len(arr)
     for i in range(n):
         for j in range(i+1, n):
@@ -18,6 +18,6 @@ def selection_sort(arr):
 
 
 if __name__ == "__main__":
-    arr = [456, 123, 789, 0, 1, 2, 3, 3, -5, 3, 7, 8, 9]
-    selection_sort(arr)
-    print(arr)
+    sample = [456, 123, 789, 0, 1, 2, 3, 3, -5, 3, 7, 8, 9]
+    selection_sort(sample)
+    print(sample)

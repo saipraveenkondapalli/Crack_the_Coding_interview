@@ -7,17 +7,17 @@ Output: ['cinema', 'iceman', 'host', 'toes', 'save', 'doc', 'dot', 'act', 'tab',
 """
 
 
-def sortChars(s):
+def sort_chars(s):
     return ''.join(sorted(s))
 
 
-def groupAnagrams(arr):
+def group_anagrams(arr):
     # Time Complexity: O(n)
     # Space Complexity: O(n)
 
     d = {}
     for s in arr:
-        key = sortChars(s)
+        key = sort_chars(s)
         if key in d:
             d[key].append(s)
         else:
@@ -25,8 +25,9 @@ def groupAnagrams(arr):
 
     result = []
     for key in d:
-        for s in d[key]:
-            result.append(s)
+        result.extend(d[key])
+        # for s in d[key]:
+        #     result.append(s)
 
     return result
 
@@ -35,6 +36,6 @@ def groupAnagrams(arr):
 
 if __name__ == "__main__":
     arr = ['cinema', 'host', 'iceman', 'osth', 'sai', 'praveen', 'kiran', 'iceman']
-    ans = (groupAnagrams(arr))
+    ans = (group_anagrams(arr))
     print(ans)
-    print(len(ans), len(arr))
+
