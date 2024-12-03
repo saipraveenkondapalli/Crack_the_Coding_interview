@@ -1,3 +1,10 @@
+"""
+Problem: Search in a Sorted Matrix
+Given an M x N matrix in which each row and each column is sorted in ascending order, write a method to find an element.
+
+"""
+
+
 def search_in_sorted_matrix(mat: list, target: int) -> tuple:
     if not mat:
         return -1, -1
@@ -19,8 +26,6 @@ def search_in_sorted_matrix(mat: list, target: int) -> tuple:
             col -= 1
 
     return -1, -1
-
-
 
 
 if __name__ == "__main__":
